@@ -1,0 +1,78 @@
+How to build from Master branch
+
+Download the latest Steamworks SDK that Facepunch.Steamworks is compatible with. As of right now it is version 150, available for download here
+
+Copy the following folder and it's contents into your Unity project: \sdk\redistributable_bin
+
+Clone the repository locally
+
+Open the solution file (Facepunch.Steamworks.sln) in Visual Studio
+
+In the toolbar select build > build solution
+
+Navigate to the Face.Steamworks folder and copy the contents of: \Facepunch.Steamworks\bin\Debug\net46 to your Unity project.
+
+The last step is to set the .dll files to have the correct settings. Follow these steps in Unity now that you've copied the files over:
+
+    Facepunch.Steamworks.Posix.dll:
+        Any Platform: Unchecked
+        Include Platforms: Editor, Standalone
+        Platform Settings:
+            CPU: Any
+            OS: OSX
+            Switch tabs:
+                Windows: all unchecked
+                Linux and OSX: all checked
+
+    Facepunch.Steamworks.Win32.dll:
+        Any Platform: Checked
+        Include Platforms: Both Unchecked
+        Platform Settings:
+            CPU: x86
+            OS: Windows
+            Switch tabs:
+                Windows: check x86
+                everything else: Unchecked
+
+    Facepunch.Steamworks.Win64.dll:
+        Any Platform: Checked
+        Include Platforms: Both Unchecked
+        Platform Settings:
+            CPU: x86_64
+            OS: Windows
+            Switch tabs:
+                Windows: check x86_64
+                Linux and OSX: Unchecked
+
+
+File Placement
+
+Grab the latest version from the Release Page. Download the Facepunch.Steamworks file - not the source.
+
+Inside there's a UnityPlugin folder. Extract that to your project folder.
+
+
+
+Unity Config
+
+We have included the Unity .meta files in the zip file, so everything should be set up. The dlls should be assigned to the right platforms and should copy the dlls to the right locations on build.
+Initializing
+
+To start up you just call Steamworks.SteamClient.Init with your appid. If it can't initialize it'll throw an exception - so make sure you catch that and deal with it.
+try
+{
+	Steamworks.SteamClient.Init( 252490 );
+}
+catch ( System.Exception e )
+{
+	// Something went wrong - it's one of these:
+    //
+    //     Steam is closed?
+    //     Can't find steam_api dll?
+    //     Don't have permission to play app?
+    //
+}
+
+
+WARNING:
+You should only call this once on startup. Structure your code so this happens in your initialization code.
