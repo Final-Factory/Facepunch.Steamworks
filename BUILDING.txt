@@ -1,6 +1,6 @@
 How to build from Master branch
 
-Download the latest Steamworks SDK that Facepunch.Steamworks is compatible with. As of right now it is version 150, available for download here
+Download the latest Steamworks SDK that Facepunch.Steamworks is compatible with. As of right now it is version 150, available for download here (Lothsahn: I built with 1.59)
 
 Copy the following folder and it's contents into your Unity project: \sdk\redistributable_bin
 
