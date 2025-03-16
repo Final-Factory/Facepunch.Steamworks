@@ -1,16 +1,45 @@
-How to build from Master branch
+How to build from nevergames repo
 
-Download the latest Steamworks SDK that Facepunch.Steamworks is compatible with. As of right now it is version 150, available for download here (Lothsahn: I built with 1.59)
 
-Copy the following folder and it's contents into your Unity project: \sdk\redistributable_bin
+# Initial Project Setup
+1) Clone the repository locally
 
-Clone the repository locally
+2) Download the 1.59 version of Steamworks SDK.  It's available here:
+https://partner.steamgames.com/downloads/list
 
-Open the solution file (Facepunch.Steamworks.sln) in Visual Studio
+3) Unzip the sdk folder into the root folder of this project (sdk/)
 
-In the toolbar select build > build solution
 
-Navigate to the Face.Steamworks folder and copy the contents of: \Facepunch.Steamworks\bin\Debug\net46 to your Unity project.
+# Building the project (e.g. after making code changes)
+1) Open the solution file (Facepunch.Steamworks.sln) in Visual Studio
+
+2) In the toolbar select build > build solution
+
+3) Navigate to the Facepunch.Steamworks\bin\Debug\net46 folder
+
+4) Manually copy all Facepunch.Steamworks.* files into UnityPlugin.  These should overwrite the existing files there.
+* Note: Do NOT copy steam_api.dll or steam_api64.dll
+
+5) You can ignore the rest of the instructions here as they've already been setup for you.  However, I'm leaving them in for reference.
+
+6) Install or update this repo in your main repo (e.g. FinalFactory).  You should use the following git url in your project's package manager:
+https://github.com/Final-Factory/Facepunch.Steamworks.git?path=/UnityPlugin
+
+
+## Updating SDK versions
+
+1) Download the latest Steamworks SDK that Facepunch.Steamworks is compatible with.  It's available for download here:
+https://partner.steamgames.com/downloads/list
+
+2) Unzip the sdk folder into the root folder of this project (sdk/)
+
+3) Follow the instructions to build the project (above)
+
+4) Copy the files from sdk/redistributable_bin intoUnityPlugin/redistributable_bin.  This should overwrite the existing files there.
+Note: Ensure you just overwrite files--don't delete the folder and recreate.  You need the existing .meta files in there for Unity.
+
+
+# Original Facepunch instructions to update Unity files (already done if you're using the customized repo)
 
 The last step is to set the .dll files to have the correct settings. Follow these steps in Unity now that you've copied the files over:
 
