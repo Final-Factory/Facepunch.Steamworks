@@ -4,7 +4,7 @@ How to build from nevergames repo
 # Initial Project Setup
 1) Clone the repository locally
 
-2) Download the 1.59 version of Steamworks SDK.  It's available here:
+2) Download the 1.57 version of Steamworks SDK.  It's available here:
 https://partner.steamgames.com/downloads/list
 
 3) Unzip the sdk folder into the root folder of this project (sdk/)
@@ -13,14 +13,14 @@ https://partner.steamgames.com/downloads/list
 # Building the project (e.g. after making code changes)
 1) Open the solution file (Facepunch.Steamworks.sln) in Visual Studio
 
-2) In the toolbar select build > build solution
+2) In the toolbar select build > rebuild solution
 
 3) Navigate to the Facepunch.Steamworks\bin\Debug\net46 folder
 
 4) Manually copy all Facepunch.Steamworks.* files into UnityPlugin.  These should overwrite the existing files there.
 * Note: Do NOT copy steam_api.dll or steam_api64.dll
 
-5) You can ignore the rest of the instructions here as they've already been setup for you.  However, I'm leaving them in for reference.
+5) Update the version of the package in UnityPlugin/package.json
 
 6) Install or update this repo in your main repo (e.g. FinalFactory).  You should use the following git url in your project's package manager:
 https://github.com/Final-Factory/Facepunch.Steamworks.git?path=/UnityPlugin
