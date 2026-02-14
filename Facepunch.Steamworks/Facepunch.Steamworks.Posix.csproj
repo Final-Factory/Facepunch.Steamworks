@@ -13,4 +13,8 @@
 
 	<Import Project="Facepunch.Steamworks.targets" />
 
+	<Target Name="CopyAsLinux" AfterTargets="Build">
+		<Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFiles="$(OutputPath)Facepunch.Steamworks.Linux.dll" />
+	</Target>
+
 </Project>

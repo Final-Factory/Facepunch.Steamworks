@@ -16,6 +16,8 @@ https://partner.steamgames.com/downloads/list
 2) In the toolbar select build > rebuild solution
 
 3) Navigate to the Facepunch.Steamworks\bin\Debug\net46 folder
+* Note: The build automatically generates Facepunch.Steamworks.Linux.dll as a copy of the Posix dll.
+  This is needed because Unity requires separate DLLs for macOS and Linux editor/standalone platforms.
 
 4) Manually copy all Facepunch.Steamworks.* files into UnityPlugin.  These should overwrite the existing files there.
 * Note: Do NOT copy steam_api.dll or steam_api64.dll
@@ -51,7 +53,19 @@ The last step is to set the .dll files to have the correct settings. Follow thes
             OS: OSX
             Switch tabs:
                 Windows: all unchecked
-                Linux and OSX: all checked
+                Linux: all unchecked
+                OSX: all checked
+
+    Facepunch.Steamworks.Linux.dll:
+        Any Platform: Unchecked
+        Include Platforms: Editor, Standalone
+        Platform Settings:
+            CPU: Any
+            OS: Linux
+            Switch tabs:
+                Windows: all unchecked
+                Linux: all checked
+                OSX: all unchecked
 
     Facepunch.Steamworks.Win32.dll:
         Any Platform: Checked
