@@ -16,7 +16,23 @@ namespace Steamworks
 			SetInterface( server, new ISteamInput( server ) );
 			if ( Interface.Self == IntPtr.Zero ) return false;
 
-			return true;
+			// ISteamInput requires an explicit Init before any other call - without it
+			// GetConnectedControllers always returns zero controllers.
+			return Internal.Init( false );
+		}
+
+		internal override void DestroyInterface( bool server )
+		{
+			if ( Internal != null && Internal.IsValid )
+				Internal.Shutdown();
+
+			// Action and action-set handles are only valid for the lifetime of the input
+			// session - keeping them across a Shutdown/Init cycle would serve stale handles
+			DigitalHandles.Clear();
+			AnalogHandles.Clear();
+			ActionSets.Clear();
+
+			base.DestroyInterface( server );
 		}
 
 		internal const int STEAM_CONTROLLER_MAX_COUNT = 16;
@@ -48,6 +64,23 @@ namespace Steamworks
 					yield return new Controller( queryArray[i] );
 				}
 			}
+		}
+
+		/// <summary>
+		/// Fills the buffer with connected controllers and returns the count. Identical
+		/// results to <see cref="Controllers"/> but doesn't allocate, for per-frame polling.
+		/// </summary>
+		public static int GetControllers( Controller[] buffer )
+		{
+			var num = Internal.GetConnectedControllers( queryArray );
+			if ( num > buffer.Length ) num = buffer.Length;
+
+			for ( int i = 0; i < num; i++ )
+			{
+				buffer[i] = new Controller( queryArray[i] );
+			}
+
+			return num;
 		}
 
 
